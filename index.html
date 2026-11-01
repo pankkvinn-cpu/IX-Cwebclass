@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IX-C | Class Website</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f3eadb;
+      color: #4a3425;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.35;
+    }
+
+    body::before {
+      background: #d8bd9c;
+      top: -100px;
+      left: -100px;
+    }
+
+    body::after {
+      background: #c49a6c;
+      bottom: -100px;
+      right: -100px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    /* NAVBAR */
+    nav {
+      width: 100%;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(243, 234, 219, 0.9);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-content {
+      max-width: 1100px;
+      width: 90%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 700;
+      color: #6b452c;
+    }
+
+    .menu {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #6a5040;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      color: #9a633d;
+    }
+
+    /* GENERAL */
+    section {
+      min-height: 85vh;
+      padding: 80px 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 50px;
+      min-height: 85vh;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 20px;
+      background: #e2cdb3;
+      color: #805438;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 8vw, 100px);
+      line-height: 0.9;
+      color: #4a3425;
+    }
+
+    .hero h1 span {
+      color: #a66d42;
+    }
+
+    .hero p {
+      margin-top: 25px;
+      color: #765e4c;
+      line-height: 1.8;
+      max-width: 500px;
+      font-size: 15px;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 430px;
+      object-fit: cover;
+      border-radius: 30px;
+      box-shadow: 0 20px 50px rgba(74, 52, 37, 0.18);
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title span {
+      font-size: 12px;
+      color: #a66d42;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .section-title h2 {
+      font-size: 40px;
+      margin: 10px 0;
+      color: #4a3425;
+    }
+
+    .section-title p {
+      color: #806b5b;
+      font-size: 14px;
+    }
+
+    /* STRUCTURE */
+    .structure-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .role-card {
+      background: rgba(255, 250, 243, 0.8);
+      border: 1px solid rgba(166, 109, 66, 0.15);
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .role-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(74, 52, 37, 0.12);
+    }
+
+    .role-card h3 {
+      font-size: 16px;
+      color: #a66d42;
+      margin-bottom: 8px;
+    }
+
+    .role-card p {
+      font-size: 14px;
+      color: #654c3a;
+    }
+
+    /* SCHEDULE */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+    }
+
+    .schedule-card {
+      background: rgba(255, 250, 243, 0.8);
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(166, 109, 66, 0.15);
+    }
+
+    .schedule-card h3 {
+      text-align: center;
+      color: #9a633d;
+      margin-bottom: 15px;
+      font-size: 17px;
+    }
+
+    .subject {
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      background: #ead9c5;
+      font-size: 11px;
+      color: #5f4634;
+      text-align: center;
+    }
+
+    /* STORIES */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .story-card {
+      background: rgba(255, 250, 243, 0.8);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(166, 109, 66, 0.15);
+      transition: 0.3s;
+    }
+
+    .story-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(74, 52, 37, 0.12);
+    }
+
+    .story-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+    }
+
+    .story-content {
+      padding: 20px;
+    }
+
+    .story-content span {
+      font-size: 11px;
+      color: #a66d42;
+    }
+
+    .story-content h3 {
+      margin: 8px 0;
+      color: #4a3425;
+    }
+
+    .story-content p {
+      font-size: 13px;
+      color: #786252;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #806b5b;
+      font-size: 12px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1000px) {
+      .structure-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .schedule-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .menu {
+        gap: 12px;
+      }
+
+      .menu a {
+        font-size: 11px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        height: 300px;
+      }
+
+      .schedule-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stories-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .schedule-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .structure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-content">
+      <div class="logo">IX-C</div>
+
+      <div class="menu">
+        <a class="active" onclick="showPage('home', this)">Beranda</a>
+        <a onclick="showPage('structure', this)">Struktur</a>
+        <a onclick="showPage('schedule', this)">Jadwal</a>
+        <a onclick="showPage('stories', this)">Stories</a>
+        <a onclick="showPage('piket', this)">Piket</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BERANDA -->
+  <section id="home">
+    <div class="container hero">
+
+      <div>
+        <span class="tag">WELCOME TO OUR CLASS</span>
+
+        <h1>
+          IX-<span>C</span>
+        </h1>
+
+        <p>
+          Tempat kami belajar, tumbuh, bercanda,
+          dan menciptakan cerita bersama.
+          Satu kelas, banyak cerita, satu kenangan.
+        </p>
+      </div>
+
+      <img
+        class="hero-image"
+        src="Fotokelas.jpg"
+        alt="Class"
+      >
+
+    </div>
+  </section>
+
+  <!-- STRUKTUR -->
+  <section id="structure" class="hidden">
+    <div class="container">
+
+      <div class="section-title">
+        <span>OUR TEAM</span>
+        <h2>Struktur Kelas</h2>
+        <p>Orang-orang yang membantu mengatur kelas IX-C.</p>
+      </div>
+
+      <div class="structure-grid">
+
+        <div class="role-card">
+          <h3>Wali Kelas</h3>
+          <p>Aprilian Dony S.p.d</p>
+        </div>
+
+        <div class="role-card">
+          <h3>Ketua Kelas</h3>
+          <p>Muhammad Novin Alghozaly</p>
+        </div>
+
+        <div class="role-card">
+          <h3>Wakil Ketua</h3>
+          <p>Muhammad Ravelino Putra E.</p>
+        </div>
+
+        <div class="role-card">
+          <h3>Sekretaris 1</h3>
+          <p>Nara Leandra Margaretha</p>
+        </div>
+
+        <div class="role-card">
+          <h3>Sekretaris 2</h3>
+          <p>Andita Nurhidayatul Fitriah</p>
+        </div>
+
+        <div class="role-card">
+          <h3>Bendahara 1</h3>
+          <p>Sabrina Maniki Fibriani G.</p>
+        </div>
+
+        <div class="role-card">
+          <h3>Bendahara 2</h3>
+          <p>Siti Rizky Syafaria</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- JADWAL -->
+  <section id="schedule" class="hidden">
+    <div class="container">
+
+      <div class="section-title">
+        <span>OUR SCHEDULE</span>
+        <h2>Jadwal Pelajaran</h2>
+        <p>Jadwal kegiatan belajar IX-C.</p>
+      </div>
+
+      <div class="schedule-grid">
+
+        <div class="schedule-card">
+          <h3>Senin</h3>
+          <div class="subject">Jam 1-2 — Matematika ( Bu Acik )</div>
+          <div class="subject">Jam 3-4 — Ilmu Pengetahuan Sosial (IPS) ( Bu Trisna )</div>
+          <div class="subject">Jam 5-6 — Bhs.Indonesia ( Pak Hamid )</div>
+          <div class="subject">Jam 7 — Informatika ( Pak Endra )</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Selasa</h3>
+          <div class="subject">Jam 1-2 — Informatika ( Pak Endra )</div>
+          <div class="subject">Jam 3-4 — PPKN ( Bu Titiek )</div>
+          <div class="subject">Jam 5-6 — Baca Tulis Al-Qur'an (BTQ) ( Bu Aisyah )</div>
+          <div class="subject">Jam 7-8 — Seni Budaya</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Rabu</h3>
+          <div class="subject">Jam 1-2 — Ilmu Pengetahuan Sosial (IPS) ( Bu Trisna )</div>
+          <div class="subject">Jam 3-4 — Bhs Inggris ( Bu Nurul )</div>
+          <div class="subject">Jam 5-6 — Ilmu Pengetahuan Alam (IPA) ( Pak Edy )</div>
+          <div class="subject">Jam 7-8 — Matematika ( Bu Acik )</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Kamis</h3>
+          <div class="subject">Jam 1-2 — Bhs Jawa ( Bu Genduk )</div>
+          <div class="subject">Jam 3-5 — Ilmu Pengetahuan Alam (IPA) ( Pak Edy )</div>
+          <div class="subject">Jam 6 — PPKN ( Bu Titiek )</div>
+          <div class="subject">Jam 7-8 — Bhs Inggris ( Bu Nurul )</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Jumat</h3>
+          <div class="subject">Jam 1-3 — Pendidika Agama Islam ( Bu lia )</div>
+          <div class="subject">Jam 4-5 — Bhs Indonesia ( Pak Hamid )</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Sabtu</h3>
+          <div class="subject">Jam 1-3 — PJOK ( Pak Dony )</div>
+          <div class="subject">Jam 4 — Matematika ( Bu Acik )</div>
+          <div class="subject">Jam 5-6 — Bhs Indonesia ( Pak Hamid )</div>
+          <div class="subject">Jam 7 — Seni Budaya ( Bu Damar )</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section id="stories" class="hidden">
+    <div class="container">
+
+      <div class="section-title">
+        <span>OUR STORIES</span>
+        <h2>Stories</h2>
+        <p>Beberapa cerita dan momen dari kelas IX-C.</p>
+      </div>
+
+      <div class="stories-grid">
+
+        <div class="story-card">
+          <img
+            src="Fotokelas.jpg"
+            alt="Kegiatan Jalan-Jalan Mbolang (JJM)"
+          >
+
+          <div class="story-content">
+            <span>25 September 2026</span>
+            <h3>Kegiatan Jalan-Jalan Mbolang (JJM)</h3>
+            <p>
+              Awal dari perjalanan baru bersama teman-teman
+              di kelas IX-C.
+            </p>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <img
+            src="Fotokelas2.jpg"
+            alt="Lomba fashion"
+          >
+
+          <div class="story-content">
+            <span>22 Oktober 2026</span>
+            <h3>Lomba fashion</h3>
+            <p>
+              Lomba fashion dalam memperingati hari santri Nasional
+              perwakilan kelas 9c 
+              syafa & Nadiva
+            </p>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <img
+            src="Fotokelas3.jpg"
+            alt="Wali Kelas Tercinta"
+          >
+
+          <div class="story-content">
+            <span>2026</span>
+            <h3>Wali Kelas Tercinta</h3>
+            <p>
+              Wali Kelas 9c bpk. Berdita Dony Aprilian S,p.d
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PIKET -->
+  <section id="piket" class="hidden">
+    <div class="container">
+
+      <div class="section-title">
+        <span>JADWAL PIKET</span>
+        <h2>Piket Kelas IX-C</h2>
+        <p>Daftar siswa yang bertugas dari Senin sampai Sabtu.</p>
+      </div>
+
+      <div class="schedule-grid">
+
+        <div class="schedule-card">
+          <h3>Senin</h3>
+          <div class="subject">Nama Siswa 1</div>
+          <div class="subject">Nama Siswa 2</div>
+          <div class="subject">Nama Siswa 3</div>
+          <div class="subject">Nama Siswa 4</div>
+          <div class="subject">Nama Siswa 5</div>
+          <div class="subject">Nama Siswa 6</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Selasa</h3>
+          <div class="subject">Nama Siswa 7</div>
+          <div class="subject">Nama Siswa 8</div>
+          <div class="subject">Nama Siswa 9</div>
+          <div class="subject">Nama Siswa 10</div>
+          <div class="subject">Nama Siswa 11</div>
+          <div class="subject">Nama Siswa 12</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Rabu</h3>
+          <div class="subject">Nama Siswa 13</div>
+          <div class="subject">Nama Siswa 14</div>
+          <div class="subject">Nama Siswa 15</div>
+          <div class="subject">Nama Siswa 16</div>
+          <div class="subject">Nama Siswa 17</div>
+          <div class="subject">Nama Siswa 18</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Kamis</h3>
+          <div class="subject">Nama Siswa 19</div>
+          <div class="subject">Nama Siswa 20</div>
+          <div class="subject">Nama Siswa 21</div>
+          <div class="subject">Nama Siswa 22</div>
+          <div class="subject">Nama Siswa 23</div>
+          <div class="subject">Nama Siswa 24</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Jumat</h3>
+          <div class="subject">Nama Siswa 25</div>
+          <div class="subject">Nama Siswa 26</div>
+          <div class="subject">Nama Siswa 27</div>
+          <div class="subject">Nama Siswa 28</div>
+          <div class="subject">Nama Siswa 29</div>
+        </div>
+
+        <div class="schedule-card">
+          <h3>Sabtu</h3>
+          <div class="subject">Nama Siswa 30</div>
+          <div class="subject">Nama Siswa 31</div>
+          <div class="subject">Nama Siswa 32</div>
+          <div class="subject">Nama Siswa 33</div>
+          <div class="subject">Nama Siswa 34</div>
+          <div class="subject">Nama Siswa 35</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 IX-C <br>
+    Together We Create Memories.
+  </footer>
+
+  <script>
+    function showPage(page, element) {
+      const sections = [
+        "home",
+        "structure",
+        "schedule",
+        "stories",
+        "piket"
+      ];
+
+      sections.forEach(function(id) {
+        document.getElementById(id).classList.add("hidden");
+      });
+
+      document.getElementById(page).classList.remove("hidden");
+
+      document.querySelectorAll(".menu a").forEach(function(link) {
+        link.classList.remove("active");
+      });
+
+      if (element) {
+        element.classList.add("active");
+      }
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+  </script>
+
+</body>
+</html>
